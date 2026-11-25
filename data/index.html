@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<style>
+    h1 {
+        text-align: center;
+        font-size: 80px;
+        font-weight: bold;
+        padding-top: 30px;
+    }
+
+    p {
+        text-align: center;
+        font-size: 160px;
+        font-weight: bold;
+    }
+
+    footer {
+        position: absolute;
+        margin-left: 25px;
+        font-size: 40px;
+    }
+</style>
+
+<head>
+    <!-- <link rel="stylesheet" href="styles.css" type="type/css" /> -->
+</head>
+<script>
+    let uptime = 0;
+    setInterval(() => { fetchLoop(); }, 1000);
+    function fetchLoop() {
+        fetch("/temp")
+            .then(response => response.text())
+            .then(text => document.getElementById("temp").innerHTML = text);
+        fetch("/humid")
+            .then(response => response.text())
+            .then(text => document.getElementById("humid").innerHTML = text);
+        document.getElementById("uptime").innerHTML = uptime++;
+    }
+</script>
+
+<body>
+    <h1 id="header">
+        <strong>
+            DHT-20 Sensor
+        </strong>
+    </h1>
+    <p>
+        <a id="temp"></a>&#176;C
+    </p>
+    <p>
+        <a id="humid"></a>% RH
+    </p>
+    <footer>
+        ESP32 Uptime: <a id="uptime"></a><br>
+        <br>
+        Name: Andrew Rerecich<br>
+        Student Number: 000845049
+    </footer>
+</body>
+
+</html>
